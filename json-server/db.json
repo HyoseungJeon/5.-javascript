@@ -1,0 +1,33 @@
+{
+  "clubs": [
+    {
+      "id": "JavaTravelClub",
+      "name": "JavaTravelClub",
+      "intro": "hello world",
+      "foundationTime": "2021-01-23",
+      "members": "Welcome to Java Travel Club!ㅁㄴㅇㅁㄴㅇㅁㄴ"
+    },
+    {
+      "id": "JavaScriptTravelClub",
+      "name": "JavaScriptTravelClub",
+      "intro": "Welcome to JavaScript Travel Club!",
+      "foundationTime": "2021-01-21",
+      "members": [
+        {
+          "email": "mwkim@nextree.io",
+          "name": "김민우",
+          "phoneNumber": "010-0000-0000",
+          "nickname": "민우",
+          "role": "President"
+        },
+        {
+          "email": "yhlee@nextree.io",
+          "name": "이영희",
+          "phoneNumber": "010-1111-1111",
+          "nickname": "영희",
+          "role": "Member"
+        }
+      ]
+    }
+  ]
+}

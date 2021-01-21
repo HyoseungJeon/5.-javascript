@@ -1,3 +1,4 @@
+import { TravelClub } from '../../model/index.js';
 import { clubStateKeeper } from '../../state/index.js';
 import BaseView from './BaseView.js';
 
@@ -5,15 +6,17 @@ class ClubModifyView extends BaseView{
 
     _parent = document.getElementById('club-modify');
     _element;
+    _clubId;
+    _club;
 
-    init(){
-        clubStateKeeper.findOne();
+    async init(utilid){
+        await clubStateKeeper.findOne(utilid);
     }
 
     addClickHandler(handler){
         this._parent.addEventListener('click', event => {
             const row = event.target.closest('tr');
-
+            
             if (!row){
                 return;
             }
@@ -34,8 +37,14 @@ class ClubModifyView extends BaseView{
                 break;
             
             case "btn_Complet":
-                this._element.addEventListener('click',event=>{
-                    handler();
+                this._element.addEventListener('click',async event=>{
+                    const time = document.getElementById("club_time").value;
+                    const intro = document.getElementById("club_intro").value;
+                    this._club.foundationTime = time;
+                    this._club.intro = intro;
+                    
+                    await clubStateKeeper.modify(this._club);
+                    handler(this._clubId);
                 });
                 break;
         }
@@ -49,7 +58,7 @@ class ClubModifyView extends BaseView{
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="exampleInputName2" class="title">창설일</label>
-                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="" value=${club.foundationTime}>
+                                        <input type="text" class="form-control" id="club_time" placeholder="" value=${club.foundationTime}>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -67,18 +76,19 @@ class ClubModifyView extends BaseView{
     renderBody(club){
         return `
         <div class="content">
-                        <div class="title">소개</div>
-
-                        <div class="content-inner">
-                            <textarea class="form-control" rows="15">${club.intro}</textarea>
-                        </div>
-                    </div>
+                <div class="title">소개</div>
+                    <div class="content-inner">
+                        <textarea id="club_intro" class="form-control" rows="15">${club.intro}</textarea>
+            </div>
+        </div>
         `
     }
 
     renderContent(){
         //const {clubs} = clubStateKeeper;
         const {club} = clubStateKeeper;
+        this._clubId=club.id;
+        this._club=club;
         return `
         <div class="panel-body">
                     ${this.renderInline(club)}

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "start": "webpack-dev-server --mode development --open",
+    "server-start" :"json-server --watch json-server/db.json --nc false"
   },
   "author": "Nextree",
   "license": "ISC",
@@ -28,6 +29,7 @@
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.1",
-    "yarn": "^1.22.10"
+    "yarn": "^1.22.10",
+    "json-server": "^0.16.3"
   }
 }

@@ -1,13 +1,16 @@
 // Data storege?
 
-import { TravelClub } from '../../model/index.js'
+import { TravelClub } from '../../model/index.js' //naming이 된 거는 {}로 가져온다.
+import clubApiStub from '../apiclient/ClubApiStub.js'
 
 //const { TravelClub } = require("../../model");
 
+
+
 class ClubStateKeeper {
 
-
     constructor() {
+        this.club = {};
         this.clubs = [];
     }
 
@@ -15,20 +18,24 @@ class ClubStateKeeper {
         this.club = TravelClub.sample();
     }
 
-    findOne(clubName){
-        this.club = TravelClub.sample();
+    async findOne(id){
+        this.club = await clubApiStub.retrieveClub(id);
     }
 
-    findAllClubs() {
-        this.clubs = [TravelClub.sample()];
+    async findAllClubs() {
+        this.clubs = await clubApiStub.retrieveAllClubs();
     }
 
-    modify(club){
-
+    async modify(club){
+        await clubApiStub.modifyClub(club);
     }
 
-    remove(clubName){
+    async remove(id){
+        await clubApiStub.deleteClub(id);
+    }
 
+    async create(club){
+        await clubApiStub.registerClub(club);
     }
 }
 

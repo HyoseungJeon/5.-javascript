@@ -4,12 +4,11 @@ import BaseView from './BaseView.js';
 class ClubDetailView extends BaseView{
 
     _parent = document.getElementById('club-detail');
-    _btn_toList = document.getElementById('btn_toList');
     _element;
+    _clubId;
 
-    init(){
-        //clubStateKeeper.findAllClubs();
-        clubStateKeeper.findOne();
+    async init(id){
+        await clubStateKeeper.findOne(id);
     }
     
     addClickHandler(parent, handler){
@@ -23,12 +22,13 @@ class ClubDetailView extends BaseView{
 
             case "btn_toModify":
                 this._element.addEventListener('click',event=>{
-                    handler();
+                    handler(this._clubId);
                 });
                 break;
             
             case "btn_Delete":
-                this._element.addEventListener('click',event=>{
+                this._element.addEventListener('click',async event=>{
+                    await clubStateKeeper.remove(this._clubId);
                     handler();
                 });
                 break;
@@ -61,6 +61,7 @@ class ClubDetailView extends BaseView{
     renderContent(){
         //const {clubs} = clubStateKeeper;
         const {club} = clubStateKeeper;
+        this._clubId=club.id;
         return `
         <div class="panel-body">
             ${this.renderInline(club)}
