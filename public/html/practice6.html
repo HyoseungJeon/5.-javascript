@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Programing</title>
+</head>
+<body>
+    <div id="app">
+        <ol>
+            <li v-for="(item, index, name) in list" v-bind:key="index">index: {{index}} name : {{item.name}}, value: {{item.value}}</li>
+            <li v-for="property in list">{{JSON.stringfly(property)}}</li>
+        </ol>
+    </div>
+
+    <script>
+        const sampleObj={key:1, name:'one',value:'1'};
+        const list = [
+            {key:1, name:'one',value:'1'},
+            {key:2, name:'two',value:'2'},
+            {key:3, name:'three',value:'3'}
+        ];
+
+        let vm = new Vue({
+            el:"#app",
+            data:function(){
+                return {
+                    list:list,
+                    sampleobj:sampleObj
+                }
+            },
+            methods:{
+
+            },
+        })
+    </script>
+</body>
+</html>

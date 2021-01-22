@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/src/practice//practice3.js"></script>
+    <script src="/src/practice//practice4.js"></script>
+    <title>Vue_pracitce2</title>
+</head>
+<body>
+    <div id="app">
+        <child-component :on-press="onPress"></child-component>
+        <another-component @emit-event="onPress" ></another-component>
+    </div>
+    
+    <script>
+        let vm = new Vue({
+            el : '#app',
+            data :function() {
+                return {
+                    childData : ""
+                }
+            },
+            methods :{
+                onPress: function(data){
+                    alert(data);
+                }
+            },
+            components:{
+                'child-component' : childComponent,
+                'another-component' : anotherComponent
+            }
+        })
+    </script>
+</body>
+</html>

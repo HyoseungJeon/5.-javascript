@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/src/practice//practice2.js"></script>
+    <title>Vue_pracitce2</title>
+</head>
+<body>
+    <div id="app">
+        입력 : <input id="inputData" type="text" name="inputData" v-model="inputValue" 
+        @keydown.enter="enterKeyPressed"/>
+
+        <child-component v-bind:input-value="inputValue"></child-component>
+    </div>
+    
+    <script>
+        let vm = new Vue({
+            el : '#app',
+            data (){
+                return {
+                    inputValue : ""
+                }
+            },
+            methods :{
+                enterKeyPressed(){alert("입력이 완료 되었습니다.")}
+            },
+            components:{
+                'child-component' : childComponent
+            }
+        })
+    </script>
+</body>
+</html>
